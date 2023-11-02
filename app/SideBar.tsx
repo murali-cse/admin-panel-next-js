@@ -2,10 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BsGrid, BsPeople, BsFiles, BsDisplay } from "react-icons/bs";
 
 type SidebarProps = {
   title: string;
-  icon?: string;
+  icon?: React.ReactElement;
   path: string;
 };
 
@@ -16,18 +17,22 @@ const SideBar = () => {
     {
       title: "Dashboard",
       path: "/",
+      icon: <BsGrid />,
     },
     {
       title: "Employees",
       path: "/employees",
+      icon: <BsPeople />,
     },
     {
       title: "Projects",
       path: "/projects",
+      icon: <BsDisplay />,
     },
     {
       title: "Leaves",
       path: "/leave",
+      icon: <BsFiles />,
     },
   ];
 
@@ -62,18 +67,24 @@ const SideBar = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-2 ">
             {sidebar.map((val) => {
+              let isSelected: boolean = false;
+              if (val.path !== "/") {
+                isSelected = pathname.includes(val.path);
+              } else {
+                isSelected = pathname == "/";
+              }
+
               return (
                 <li key={val.path}>
                   <Link
                     href={val.path}
                     className={`flex items-center p-2 ${
-                      pathname == val.path
-                        ? "bg-blue-800 text-gray-50"
-                        : "text-gray-900"
+                      isSelected ? "bg-blue-800 text-gray-50" : "text-gray-900"
                     }  rounded-lg dark:text-white`}
                   >
+                    {val.icon}
                     <span className="ml-3">{val.title}</span>
                   </Link>
                 </li>
