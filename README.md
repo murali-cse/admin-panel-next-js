@@ -4,12 +4,12 @@ This project is build on NextJs and Prisma for backend, It's helps to manage sta
 
 ## Features and Todos
 
-- [] Auth
-- [] Analytics Dashboard
-- [] Add and manage staffs
-- [] Manage leave and permissions
-- [] Holiday and Event Management
-- [] Add new projects and track the status
+- [ ] Auth
+- [ ] Analytics Dashboard
+- [ ] Add and manage staffs
+- [ ] Manage leave and permissions
+- [ ] Holiday and Event Management
+- [ ] Add new projects and track the status
 
 ## Getting Started
 
