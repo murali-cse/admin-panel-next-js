@@ -12,11 +12,11 @@ const Employees = () => {
         <div className="flex justify-between items-center">
           <PageTitle>Employees</PageTitle>
           <Link href={"/employees/addemp"}>
-            <button className="flex items-center gap-2 rounded-sm bg-blue-700 px-3 py-2">
+            <button className="flex items-center gap-2 rounded-md bg-blue-700 px-3 py-2 text-white text-sm">
               <span>
                 <AiOutlinePlus
-                  className="text-black dark:text-white"
-                  style={{ width: "20px", height: "20px" }}
+                  className="text-white"
+                  style={{ width: "18px", height: "18px" }}
                 />
               </span>
               Add

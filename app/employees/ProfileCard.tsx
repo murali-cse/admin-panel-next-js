@@ -20,13 +20,15 @@ const ProfileCard = () => {
           Flutter Developer
         </span>
         <div className="flex gap-3 mt-3">
-          <OutlinedButton className="text-blue-400 border-blue-400">
+          <OutlinedButton className="text-blue-400 border-blue-400 text-sm">
             Edit
           </OutlinedButton>
-          <OutlinedButton className="text-green-400 border-green-400">
+          <OutlinedButton className="text-green-400 border-green-400 text-sm">
             Active
           </OutlinedButton>
-          <button className="bg-red-600 py-2 px-6 text-white">Delete</button>
+          <button className="bg-red-600 py-2 px-6 text-white rounded-md text-sm">
+            Delete
+          </button>
         </div>
       </div>
     </div>
