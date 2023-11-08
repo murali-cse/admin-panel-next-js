@@ -9,7 +9,7 @@ const BackButton = () => {
   const goBack = () => route.back();
   return (
     <OutlinedButton
-      className="py-2 border-blue-700 text-blue-700 dark:text-white flex items-center gap-3"
+      className="py-2 border-blue-700 text-blue-700 dark:text-white flex items-center gap-2"
       onClick={goBack}
     >
       <span>
