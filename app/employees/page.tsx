@@ -1,11 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ProfileCard from "./ProfileCard";
 import PageTitle from "../components/PageTitle";
 
 import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
+import prisma from "@/prisma/client";
 
-const Employees = () => {
+const Employees = async () => {
+  const employees = await prisma.employee.findMany();
+
   return (
     <main>
       <div className="p-4">
@@ -24,7 +27,15 @@ const Employees = () => {
           </Link>
         </div>
         <div className="">
-          <ProfileCard />
+          {employees.map<ReactNode>((emp) => {
+            return (
+              <ProfileCard
+                key={emp.id}
+                name={emp.name}
+                designation={emp.designation}
+              />
+            );
+          })}
         </div>
       </div>
     </main>

@@ -2,7 +2,12 @@ import React from "react";
 import Image from "next/image";
 import OutlinedButton from "../components/OutlinedButton";
 
-const ProfileCard = () => {
+interface Props {
+  name: string;
+  designation: string;
+}
+
+const ProfileCard = ({ name, designation }: Props) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="flex flex-col items-center p-10">
@@ -13,11 +18,11 @@ const ProfileCard = () => {
           width={200}
           height={250}
         />
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-          Gokul
+        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white capitalize">
+          {name}
         </h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          Flutter Developer
+        <span className="text-sm text-gray-500 dark:text-gray-400 capitalize">
+          {designation}
         </span>
         <div className="flex gap-3 mt-3">
           <OutlinedButton className="text-blue-400 border-blue-400 text-sm">
