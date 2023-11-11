@@ -7,11 +7,11 @@ const AddEmployee = () => {
   return (
     <main>
       <div className="p-4">
-        <div className="flex justify-between items-center">
+        <div className="block lg:flex justify-between items-center">
           <PageTitle>Add Employee</PageTitle>
           <BackButton />
         </div>
-        <div className="grid grid-cols-3 gap-3 mt-3">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-3">
           {/* name field start */}
           <div>
             <label htmlFor="name" className="text-sm font-medium">
@@ -60,7 +60,7 @@ const AddEmployee = () => {
           </div>
           {/* contact field end */}
         </div>
-        <div className="grid grid-cols-3 gap-3 mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-5">
           {/* email field start */}
           <div>
             <label htmlFor="email" className="text-sm font-medium">
@@ -110,7 +110,7 @@ const AddEmployee = () => {
           </div>
           {/* designation field end */}
         </div>
-        <div className="grid grid-cols-3 gap-3 mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-5">
           {/* address field start */}
           <div>
             <label htmlFor="email" className="text-sm font-medium">

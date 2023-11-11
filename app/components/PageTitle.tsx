@@ -5,7 +5,11 @@ type Props = {
 };
 
 const PageTitle = ({ children }: Props) => {
-  return <p className="font-semibold text-3xl my-5">{children}</p>;
+  return (
+    <p className="font-semibold text-xl md:text-2xl lg:text-3xl my-5">
+      {children}
+    </p>
+  );
 };
 
 export default PageTitle;

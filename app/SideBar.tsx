@@ -93,7 +93,7 @@ const SideBar = () => {
                     href={val.path}
                     className={`flex items-center py-4 px-4 ${
                       isSelected ? "bg-blue-800 text-gray-50" : "text-gray-900"
-                    }  rounded-lg dark:text-white text-sm`}
+                    }  rounded-lg dark:text-white text-sm transition-colors`}
                   >
                     {val.icon}
                     <span className="ml-3">{val.title}</span>
