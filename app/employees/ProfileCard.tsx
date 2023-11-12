@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import OutlinedButton from "../components/OutlinedButton";
+import Button from "../components/Button";
 
 interface Props {
   name: string;
@@ -24,16 +25,14 @@ const ProfileCard = ({ name, designation }: Props) => {
         <span className="text-sm text-gray-500 dark:text-gray-400 capitalize">
           {designation}
         </span>
-        <div className="flex gap-3 mt-3">
-          <OutlinedButton className="text-blue-400 border-blue-400 text-sm">
+        <div className="flex gap-3 mt-3 flex-wrap">
+          <OutlinedButton className="text-zinc-600 border-zinc-600">
             Edit
           </OutlinedButton>
-          <OutlinedButton className="text-green-400 border-green-400 text-sm">
+          <OutlinedButton className="text-zinc-600 border-zinc-600">
             Active
           </OutlinedButton>
-          <button className="bg-red-600 py-2 px-6 text-white rounded-md text-sm">
-            Delete
-          </button>
+          <Button className="bg-red-600 text-white">Delete</Button>
         </div>
       </div>
     </div>

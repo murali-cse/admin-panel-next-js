@@ -9,7 +9,7 @@ type Props = {
 const OutlinedButton = ({ className, children, onClick }: Props) => {
   return (
     <button
-      className={`border-solid border-2 px-2 ${className} text-sm rounded-md`}
+      className={`border-solid border-2 py-1 w-20 max-w-md text-sm rounded-md ${className}`}
       onClick={onClick}
     >
       {children}

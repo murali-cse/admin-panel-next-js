@@ -26,7 +26,7 @@ const Employees = async () => {
             </button>
           </Link>
         </div>
-        <div className="">
+        <div className="grid grid-cols-3 gap-4">
           {employees.map<ReactNode>((emp) => {
             return (
               <ProfileCard

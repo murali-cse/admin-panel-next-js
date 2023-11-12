@@ -1,9 +1,40 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import PageTitle from "@/app/components/PageTitle";
 import BackButton from "@/app/components/BackButton";
 import Button from "@/app/components/Button";
+import { z } from "zod";
+import { createEmployeeSchema } from "@/app/utils/schema";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Spinner } from "@/app/components/Spinner";
 
 const AddEmployee = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+
+  type Employee = z.infer<typeof createEmployeeSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Employee>();
+
+  async function onSubmit(data: Employee) {
+    setLoading(true);
+    const res = await axios.post("/api/employee/add", data);
+    console.log(res.data);
+    if (res.data.status) {
+      router.push("/employees");
+    } else {
+      setLoading(false);
+      setShowError(true);
+    }
+  }
+
   return (
     <main>
       <div className="p-4">
@@ -11,52 +42,64 @@ const AddEmployee = () => {
           <PageTitle>Add Employee</PageTitle>
           <BackButton />
         </div>
-        <div className="bg-white dark:bg-[#1F2A37] p-5 rounded-md space-y-5">
+        <form
+          className="bg-white dark:bg-[#1F2A37] p-5 rounded-md space-y-5"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* name field start */}
             <div>
               <label htmlFor="name" className="text-sm font-medium">
-                Name
+                Name<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="text"
-                  name=""
                   id="name"
                   placeholder="Name"
                   className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
+                  {...register("name", { required: true })}
                 />
               </div>
+              <sub className="text-red-600">
+                {errors.name && "Name is required"}
+              </sub>
             </div>
             {/* name field end */}
             {/* dob field start */}
             <div>
               <label htmlFor="dob" className="text-sm font-medium">
-                Date of Birth
+                Date of Birth<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="date"
-                  name=""
-                  id="name"
+                  id="dob"
                   className="ring-1 ring-inset ring-gray-300  dark:text-gray-500 rounded-md px-3 py-2 w-full"
+                  {...register("dob", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.dob && "Date of Birth is required"}
+                </sub>
               </div>
             </div>
             {/* dob field end */}
             {/* contact field start */}
             <div>
               <label htmlFor="contact" className="text-sm font-medium">
-                Contact No
+                Contact No<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="number"
-                  name=""
                   id="contact"
                   placeholder="Contact no"
                   className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full"
+                  {...register("contact", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.contact && "Contact No is required"}
+                </sub>
               </div>
             </div>
             {/* contact field end */}
@@ -65,48 +108,56 @@ const AddEmployee = () => {
             {/* email field start */}
             <div>
               <label htmlFor="email" className="text-sm font-medium">
-                Email
+                Email<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="email"
-                  name=""
                   id="email"
                   placeholder="example@example.com"
                   className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
-                  required
+                  {...register("email", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.email && "Email is required"}
+                </sub>
               </div>
             </div>
             {/* email field end */}
             {/* doj field start */}
             <div>
               <label htmlFor="doj" className="text-sm font-medium">
-                Date of Join
+                Date of Join<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="date"
-                  name=""
                   id="doj"
                   className="ring-1 ring-inset ring-gray-300  dark:text-gray-500 rounded-md px-3 py-2 w-full"
+                  {...register("doj", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.doj && "Date of Joining is required"}
+                </sub>
               </div>
             </div>
             {/* doj field end */}
             {/* designation field start */}
             <div>
               <label htmlFor="designation" className="text-sm font-medium">
-                Designation
+                Designation<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  type="number"
-                  name=""
+                  type="text"
                   id="designation"
                   placeholder="Designation"
                   className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full"
+                  {...register("designation", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.designation && "Designation is required"}
+                </sub>
               </div>
             </div>
             {/* designation field end */}
@@ -115,27 +166,46 @@ const AddEmployee = () => {
             {/* address field start */}
             <div>
               <label htmlFor="email" className="text-sm font-medium">
-                Address
+                Address<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
                 <textarea
-                  name=""
-                  id="email"
                   placeholder="Address"
                   rows={5}
                   className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
-                  required
+                  {...register("address", { required: true })}
                 />
+                <sub className="text-red-600">
+                  {errors.address && "Address is required"}
+                </sub>
               </div>
             </div>
             {/* address field end */}
           </div>
+
           <div className="text-center">
-            <Button className="bg-blue-700 text-white px-10">
-              Add Employee
+            {showError ? (
+              <div
+                className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert"
+              >
+                Something Went Wrong
+              </div>
+            ) : null}
+            <Button disabled={loading} className="bg-blue-700 text-white w-40">
+              {loading ? (
+                <div>
+                  <span>
+                    <Spinner />
+                  </span>
+                  Loading..
+                </div>
+              ) : (
+                "Add Employee"
+              )}
             </Button>
           </div>
-        </div>
+        </form>
       </div>
     </main>
   );

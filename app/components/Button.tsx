@@ -1,15 +1,17 @@
-import React from "react";
+import { ReactNode } from "react";
 
 type Props = {
+  disabled?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children?: ReactNode;
   onClick?: () => void;
 };
 
-const Button = ({ className, onClick, children }: Props) => {
+const Button = ({ disabled = false, className, onClick, children }: Props) => {
   return (
     <button
-      className={`py-2 px-6 rounded-md text-sm  ${className}`}
+      disabled={disabled}
+      className={`py-2 w-20 max-w-lg rounded-md text-sm  ${className}`}
       onClick={onClick}
     >
       {children}
