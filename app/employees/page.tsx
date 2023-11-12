@@ -1,13 +1,25 @@
-import React, { ReactNode } from "react";
+"use client";
+import { ReactNode, useEffect, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import PageTitle from "../components/PageTitle";
 
 import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
-import prisma from "@/prisma/client";
+import { Employee } from "@prisma/client";
+import axios from "axios";
+import ProfileCardSkeleton from "./ProfileCardSkeleton";
 
-const Employees = async () => {
-  const employees = await prisma.employee.findMany();
+const Employees = () => {
+  const [employees, setEmployees] = useState<Employee[]>([]);
+
+  async function fetch() {
+    const res = await axios.get("/api/employee");
+    setEmployees(res.data.data);
+  }
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <main>
@@ -26,16 +38,21 @@ const Employees = async () => {
             </button>
           </Link>
         </div>
-        <div className="grid grid-cols-3 gap-4">
-          {employees.map<ReactNode>((emp) => {
-            return (
-              <ProfileCard
-                key={emp.id}
-                name={emp.name}
-                designation={emp.designation}
-              />
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {employees.length != 0
+            ? employees.map<ReactNode>((emp) => {
+                return (
+                  <ProfileCard
+                    key={emp.id}
+                    name={emp.name}
+                    designation={emp.designation}
+                    status={emp.status}
+                  />
+                );
+              })
+            : [1, 2, 3, 4, 5, 6].map((v) => {
+                return <ProfileCardSkeleton key={v} />;
+              })}
         </div>
       </div>
     </main>

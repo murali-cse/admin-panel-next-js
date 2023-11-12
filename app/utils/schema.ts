@@ -9,3 +9,7 @@ export const createEmployeeSchema = z.object({
   designation: z.string().min(1).max(255),
   address: z.string().min(1).max(255),
 });
+
+export const deleteEmployeeSchema = z.object({
+  id: z.string().min(1),
+});
