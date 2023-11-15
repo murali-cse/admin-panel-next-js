@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import OutlinedButton from "../components/OutlinedButton";
-import Button from "../components/Button";
 import { Status } from "@prisma/client";
-import Badge from "../components/Badge";
 import classNames from "classnames";
+import { Button } from "flowbite-react";
 
 interface Props {
   name: string;
@@ -58,12 +57,12 @@ const ProfileCard = ({
         </span>
         <div className="flex gap-3 mt-3 flex-wrap justify-center ">
           <OutlinedButton
-            className="text-zinc-600 border-zinc-600"
+            className="text-zinc-600 border-zinc-100 dark:border-zinc-200 dark:text-zinc-200"
             onClick={onEdit}
           >
             Edit
           </OutlinedButton>
-          <Button className="bg-red-600 text-white" onClick={onDelete}>
+          <Button color="failure" onClick={onDelete}>
             Delete
           </Button>
         </div>

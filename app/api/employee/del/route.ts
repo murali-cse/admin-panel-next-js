@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   }
   const res = await prisma.employee.update({
     where: {
-      id: parseInt(body.id),
+      id: body.id,
     },
     data: {
       status: "DELETED",

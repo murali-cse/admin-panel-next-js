@@ -9,6 +9,7 @@ import {
   BsDisplay,
   BsCalendarDay,
 } from "react-icons/bs";
+import classNames from "classnames";
 
 type SidebarProps = {
   title: string;
@@ -91,9 +92,12 @@ const SideBar = () => {
                 <li key={val.path}>
                   <Link
                     href={val.path}
-                    className={`flex items-center py-4 px-4 ${
-                      isSelected ? "bg-blue-800 text-gray-50" : "text-gray-900"
-                    }  rounded-lg dark:text-white text-sm transition-colors`}
+                    className={classNames({
+                      "bg-blue-800 text-gray-50": isSelected,
+                      "text-gray-900": !isSelected,
+                      "flex items-center py-4 px-4 rounded-lg dark:text-white text-sm transition-colors":
+                        true,
+                    })}
                   >
                     {val.icon}
                     <span className="ml-3">{val.title}</span>

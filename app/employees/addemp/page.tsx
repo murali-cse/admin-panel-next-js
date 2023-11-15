@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import PageTitle from "@/app/components/PageTitle";
 import BackButton from "@/app/components/BackButton";
-import Button from "@/app/components/Button";
 import { z } from "zod";
 import { createEmployeeSchema } from "@/app/utils/schema";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/app/components/Spinner";
+import { Button } from "flowbite-react";
 
 const AddEmployee = () => {
   const router = useRouter();
@@ -165,7 +165,7 @@ const AddEmployee = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* address field start */}
             <div>
-              <label htmlFor="email" className="text-sm font-medium">
+              <label htmlFor="address" className="text-sm font-medium">
                 Address<span className="text-red-600">*</span>
               </label>
               <div className="mt-1">
@@ -192,18 +192,7 @@ const AddEmployee = () => {
                 Something Went Wrong
               </div>
             ) : null}
-            <Button disabled={loading} className="bg-blue-700 text-white w-40">
-              {loading ? (
-                <div>
-                  <span>
-                    <Spinner />
-                  </span>
-                  Loading..
-                </div>
-              ) : (
-                "Add Employee"
-              )}
-            </Button>
+            <Button type="submit"> Add Employee</Button>
           </div>
         </form>
       </div>

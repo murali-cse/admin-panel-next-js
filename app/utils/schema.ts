@@ -11,5 +11,5 @@ export const createEmployeeSchema = z.object({
 });
 
 export const deleteEmployeeSchema = z.object({
-  id: z.string().min(1),
+  id: z.number().gt(0),
 });
