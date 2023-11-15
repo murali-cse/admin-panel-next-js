@@ -16,6 +16,8 @@ interface Props {
 const statusMap: Record<Status, { label: string; color: "green" | "red" }> = {
   ACTIVE: { label: "Active", color: "green" },
   INACTIVE: { label: "Inactive", color: "red" },
+  WFH: { label: "WFH", color: "green" },
+  LEAVE: { label: "Leave", color: "red" },
   DELETED: { label: "Deleted", color: "red" },
 };
 

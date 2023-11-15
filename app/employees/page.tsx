@@ -13,14 +13,59 @@ import { ModalBody } from "flowbite-react/lib/esm/components/Modal/ModalBody";
 import { ModalFooter } from "flowbite-react/lib/esm/components/Modal/ModalFooter";
 import { useRouter } from "next/navigation";
 
+function LoadingSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
+      {[1, 2, 3, 4, 5, 6].map((v) => {
+        return <ProfileCardSkeleton key={v} />;
+      })}
+    </div>
+  );
+}
+
+function NoEmployeesFound() {
+  return (
+    <div className="flex items-center justify-center max-h-full min-h-screen">
+      <p>No Employees Found</p>
+    </div>
+  );
+}
+
+function EmployeeList({
+  list,
+  onDelete,
+}: {
+  list: Employee[];
+  onDelete: (index: number) => void;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
+      {list.map<ReactNode>((emp, index) => {
+        return (
+          <ProfileCard
+            key={emp.id}
+            name={emp.name}
+            designation={emp.designation}
+            status={emp.status}
+            onDelete={() => onDelete(index)}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 const Employees = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [employee, setEmployee] = useState<Employee>();
 
   async function fetch() {
+    setLoading(true);
     const res = await axios.get("/api/employee");
+    setLoading(false);
     setEmployees(res.data.data);
   }
 
@@ -51,34 +96,28 @@ const Employees = () => {
         <div className="flex justify-between items-center">
           <PageTitle>Employees</PageTitle>
           <Link href={"/employees/addemp"}>
-            <button className="flex items-center gap-2 rounded-md bg-blue-700 px-3 py-2 text-white text-sm">
-              <span>
+            <Button color="blue">
+              <span className="pr-2">
                 <AiOutlinePlus
                   className="text-white"
                   style={{ width: "18px", height: "18px" }}
                 />
               </span>
               Add
-            </button>
+            </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
-          {employees.length != 0
-            ? employees.map<ReactNode>((emp, index) => {
-                return (
-                  <ProfileCard
-                    key={emp.id}
-                    name={emp.name}
-                    designation={emp.designation}
-                    status={emp.status}
-                    onDelete={() => handleDelete(index)}
-                  />
-                );
-              })
-            : [1, 2, 3, 4, 5, 6].map((v) => {
-                return <ProfileCardSkeleton key={v} />;
-              })}
-        </div>
+        {!loading ? (
+          <>
+            {employees.length == 0 ? (
+              <NoEmployeesFound />
+            ) : (
+              <EmployeeList list={employees} onDelete={handleDelete} />
+            )}
+          </>
+        ) : (
+          <LoadingSkeleton />
+        )}
       </div>
       <Modal show={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
         <ModalHeader>Delete Employee</ModalHeader>

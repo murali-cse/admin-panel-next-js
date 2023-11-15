@@ -11,10 +11,7 @@ const ProfileCardSkeleton = () => {
 
   return (
     <div className="w-full h-full">
-      <SkeletonTheme
-        baseColor={`${darkTheme?.matches ? "#0E1017" : "#ebebeb"} `}
-        highlightColor={`${darkTheme?.matches ? "#1C4ED83A" : "#f5f5f5"}`}
-      >
+      <SkeletonTheme baseColor={` #ebebeb`} highlightColor={`#f5f5f5`}>
         <Skeleton height={300} className="dark:ring-1" />
       </SkeletonTheme>
     </div>

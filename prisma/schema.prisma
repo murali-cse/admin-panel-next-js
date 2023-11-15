@@ -35,5 +35,7 @@ enum Gender {
 enum Status {
   ACTIVE
   INACTIVE
+  LEAVE
+  WFH
   DELETED
 }
