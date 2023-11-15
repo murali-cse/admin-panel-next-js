@@ -1,14 +1,14 @@
 import React from "react";
 import PageTitle from "../components/PageTitle";
 
-const LeaveLoading = () => {
+const Holidays = () => {
   return (
     <main>
       <div className="p-4 h-screen">
-        <div>
-          <PageTitle>Leave</PageTitle>
+        <div className="flex justify-between items-center">
+          <PageTitle>Holidays</PageTitle>
         </div>
-        <div className="flex justify-center items-center h-5/6">
+        <div className="h-5/6 flex justify-center items-center">
           <p>Loading ...</p>
         </div>
       </div>
@@ -16,4 +16,4 @@ const LeaveLoading = () => {
   );
 };
 
-export default LeaveLoading;
+export default Holidays;

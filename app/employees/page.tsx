@@ -25,7 +25,7 @@ function LoadingSkeleton() {
 
 function NoEmployeesFound() {
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center h-5/6">
       <p>No Employees Found</p>
     </div>
   );
