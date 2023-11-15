@@ -37,7 +37,7 @@ const AddEmployee = () => {
 
   return (
     <main>
-      <div className="p-4">
+      <div className="p-4 h-screen">
         <div className="block lg:flex justify-between items-center">
           <PageTitle>Add Employee</PageTitle>
           <BackButton />
@@ -57,7 +57,7 @@ const AddEmployee = () => {
                   type="text"
                   id="name"
                   placeholder="Name"
-                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
+                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full text-black"
                   {...register("name", { required: true })}
                 />
               </div>
@@ -94,7 +94,7 @@ const AddEmployee = () => {
                   type="number"
                   id="contact"
                   placeholder="Contact no"
-                  className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full"
+                  className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full text-black"
                   {...register("contact", { required: true })}
                 />
                 <sub className="text-red-600">
@@ -115,7 +115,7 @@ const AddEmployee = () => {
                   type="email"
                   id="email"
                   placeholder="example@example.com"
-                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
+                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full text-black"
                   {...register("email", { required: true })}
                 />
                 <sub className="text-red-600">
@@ -152,7 +152,7 @@ const AddEmployee = () => {
                   type="text"
                   id="designation"
                   placeholder="Designation"
-                  className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full"
+                  className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full text-black"
                   {...register("designation", { required: true })}
                 />
                 <sub className="text-red-600">
@@ -172,7 +172,7 @@ const AddEmployee = () => {
                 <textarea
                   placeholder="Address"
                   rows={5}
-                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full"
+                  className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full text-black"
                   {...register("address", { required: true })}
                 />
                 <sub className="text-red-600">

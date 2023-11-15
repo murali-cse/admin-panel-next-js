@@ -25,7 +25,7 @@ function LoadingSkeleton() {
 
 function NoEmployeesFound() {
   return (
-    <div className="flex items-center justify-center max-h-full min-h-screen">
+    <div className="flex items-center justify-center h-full">
       <p>No Employees Found</p>
     </div>
   );
@@ -92,7 +92,7 @@ const Employees = () => {
 
   return (
     <main>
-      <div className="p-4">
+      <div className="p-4 h-screen">
         <div className="flex justify-between items-center">
           <PageTitle>Employees</PageTitle>
           <Link href={"/employees/addemp"}>
