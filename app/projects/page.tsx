@@ -1,8 +1,9 @@
-import React from "react";
+import dynamic from "next/dynamic";
 import PageTitle from "../components/PageTitle";
 import AddButton from "./AddButton";
+const DataTable = dynamic(() => import("./table"), { ssr: false });
 
-const Projects = () => {
+const Page = ({ data }: any) => {
   return (
     <main>
       <div className="p-4 h-screen">
@@ -10,12 +11,15 @@ const Projects = () => {
           <PageTitle>Projects</PageTitle>
           <AddButton />
         </div>
-        <div className="flex justify-center items-center h-5/6">
-          <p>No Projects Found</p>
+        <div>
+          <DataTable />
         </div>
+        {/* <div className="flex justify-center items-center h-5/6">
+          <p>No Projects Found</p>
+        </div> */}
       </div>
     </main>
   );
 };
 
-export default Projects;
+export default Page;

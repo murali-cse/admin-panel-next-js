@@ -25,6 +25,15 @@ model Employee {
   updatedAt       DateTime @updatedAt
 }
 
+model Project {
+  id                Int    @id @default(autoincrement())
+  name              String @db.Text
+  client_name       String @db.VarChar(255)
+  client_cmpny_name String @db.Text
+  duration          Int
+  budget            Int
+}
+
 enum Gender {
   NONE
   MALE

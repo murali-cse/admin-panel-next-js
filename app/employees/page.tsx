@@ -5,7 +5,7 @@ import PageTitle from "../components/PageTitle";
 import { AiOutlinePlus } from "react-icons/ai";
 import Link from "next/link";
 import ProfileCardSkeleton from "./ProfileCardSkeleton";
-import { Employee } from "@prisma/client";
+import { type Employee } from "@prisma/client";
 import axios from "axios";
 import { Modal, Button } from "flowbite-react";
 import { ModalHeader } from "flowbite-react/lib/esm/components/Modal/ModalHeader";
