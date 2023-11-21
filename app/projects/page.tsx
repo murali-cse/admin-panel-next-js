@@ -3,7 +3,7 @@ import PageTitle from "../components/PageTitle";
 import AddButton from "./AddButton";
 const DataTable = dynamic(() => import("./table"), { ssr: false });
 
-const Page = ({ data }: any) => {
+const Page = () => {
   return (
     <main>
       <div className="p-4 h-screen">

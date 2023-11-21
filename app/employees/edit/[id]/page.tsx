@@ -1,36 +1,56 @@
 "use client";
-import React, { useState } from "react";
-import PageTitle from "@/app/components/PageTitle";
 import BackButton from "@/app/components/BackButton";
-import { z } from "zod";
+import PageTitle from "@/app/components/PageTitle";
 import { createEmployeeSchema } from "@/app/utils/schema";
-import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { Button } from "flowbite-react";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-const AddEmployee = () => {
+type Params = {
+  id: string;
+};
+
+const Page = ({ params }: { params: Params }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
-
   type Employee = z.infer<typeof createEmployeeSchema>;
+
+  const [employee, setEmployee] = useState<Employee>();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Employee>();
 
-  async function onSubmit(data: Employee) {
-    setLoading(true);
-    const res = await axios.post("/api/employee/add", data);
+  const fetchEmployee = useCallback(async () => {
+    try {
+      let res = await axios.post("/api/employee", {
+        id: parseInt(params.id),
+      });
+      setEmployee(res.data.data);
+      let temp = { ...res.data.data, doj: res.data.data.date_of_joining };
+      delete temp.createdAt;
+      delete temp.updatedAt;
+      delete temp.status;
+      delete temp.date_of_joining;
+      reset(temp);
+    } catch (e: any) {
+      console.log(e);
+    }
+  }, [params, reset]);
 
+  useEffect(() => {
+    fetchEmployee();
+  }, [fetchEmployee]);
+
+  async function onSubmit(data: any) {
+    let res = await axios.post("/api/employee/edit", data);
     if (res.data.status) {
       router.push("/employees");
-    } else {
-      setLoading(false);
-      setShowError(true);
     }
   }
 
@@ -38,7 +58,7 @@ const AddEmployee = () => {
     <main>
       <div className="p-4 h-screen">
         <div className="block lg:flex justify-between items-center">
-          <PageTitle>Add Employee</PageTitle>
+          <PageTitle>Edit Employee</PageTitle>
           <BackButton />
         </div>
         <form
@@ -60,9 +80,7 @@ const AddEmployee = () => {
                   {...register("name", { required: true })}
                 />
               </div>
-              <sub className="text-red-600">
-                {errors.name && "Name is required"}
-              </sub>
+              <sub className="text-red-600"></sub>
             </div>
             {/* name field end */}
             {/* dob field start */}
@@ -77,9 +95,7 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300  dark:text-gray-500 rounded-md px-3 py-2 w-full"
                   {...register("dob", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.dob && "Date of Birth is required"}
-                </sub>
+                <sub className="text-red-600"></sub>
               </div>
             </div>
             {/* dob field end */}
@@ -96,9 +112,6 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full text-black"
                   {...register("contact", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.contact && "Contact No is required"}
-                </sub>
               </div>
             </div>
             {/* contact field end */}
@@ -117,9 +130,7 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full text-black"
                   {...register("email", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.email && "Email is required"}
-                </sub>
+                <sub className="text-red-600"></sub>
               </div>
             </div>
             {/* email field end */}
@@ -135,9 +146,7 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300  dark:text-gray-500 rounded-md px-3 py-2 w-full"
                   {...register("doj", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.doj && "Date of Joining is required"}
-                </sub>
+                <sub className="text-red-600"></sub>
               </div>
             </div>
             {/* doj field end */}
@@ -154,9 +163,7 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300 rounded-md border-0 px-3 py-2 w-full text-black"
                   {...register("designation", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.designation && "Designation is required"}
-                </sub>
+                <sub className="text-red-600"></sub>
               </div>
             </div>
             {/* designation field end */}
@@ -174,24 +181,15 @@ const AddEmployee = () => {
                   className="ring-1 ring-inset ring-gray-300 rounded-md px-3 py-2 w-full text-black"
                   {...register("address", { required: true })}
                 />
-                <sub className="text-red-600">
-                  {errors.address && "Address is required"}
-                </sub>
+                <sub className="text-red-600"></sub>
               </div>
             </div>
             {/* address field end */}
           </div>
-
-          <div className="text-center">
-            {showError ? (
-              <div
-                className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                role="alert"
-              >
-                Something Went Wrong
-              </div>
-            ) : null}
-            <Button type="submit"> Add Employee</Button>
+          <div className="flex justify-center">
+            <Button type="submit" color="success">
+              Edit Employee
+            </Button>
           </div>
         </form>
       </div>
@@ -199,4 +197,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default Page;

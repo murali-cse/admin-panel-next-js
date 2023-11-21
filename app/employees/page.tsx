@@ -33,10 +33,12 @@ function NoEmployeesFound() {
 
 function EmployeeList({
   list,
+  onEdit,
   onDelete,
 }: {
   list: Employee[];
   onDelete: (index: number) => void;
+  onEdit: (index: number) => void;
 }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
@@ -48,6 +50,7 @@ function EmployeeList({
             designation={emp.designation}
             status={emp.status}
             onDelete={() => onDelete(index)}
+            onEdit={() => onEdit(index)}
           />
         );
       })}
@@ -76,6 +79,10 @@ const Employees = () => {
   function handleDelete(id: number) {
     setShowDeleteModal(true);
     setEmployee(employees[id]);
+  }
+
+  function handleEdit(id: number) {
+    router.push("/employees/edit/" + employees[id].id);
   }
 
   async function deleteEmployee(id: number) {
@@ -112,7 +119,11 @@ const Employees = () => {
             {employees.length == 0 ? (
               <NoEmployeesFound />
             ) : (
-              <EmployeeList list={employees} onDelete={handleDelete} />
+              <EmployeeList
+                list={employees}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
             )}
           </>
         ) : (
