@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const employee = await prisma.employee.findMany({
     where: {
       status: {
-        in: ["ACTIVE", "INACTIVE"],
+        in: ["ACTIVE", "INACTIVE", "LEAVE", "WFH"],
       },
     },
   });
