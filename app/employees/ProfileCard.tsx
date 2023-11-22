@@ -3,7 +3,7 @@ import Image from "next/image";
 import OutlinedButton from "../components/OutlinedButton";
 import { Status } from "@prisma/client";
 import classNames from "classnames";
-import { Button } from "flowbite-react";
+import { Badge, Button } from "flowbite-react";
 
 interface Props {
   name: string;
@@ -13,10 +13,10 @@ interface Props {
   onDelete?: () => void;
 }
 
-const statusMap: Record<Status, { label: string; color: "green" | "red" }> = {
+const statusMap: Record<Status, { label: string; color: string }> = {
   ACTIVE: { label: "Active", color: "green" },
   INACTIVE: { label: "Inactive", color: "red" },
-  WFH: { label: "WFH", color: "green" },
+  WFH: { label: "WFH", color: "indigo" },
   LEAVE: { label: "Leave", color: "red" },
   DELETED: { label: "Deleted", color: "red" },
 };
@@ -30,18 +30,8 @@ const ProfileCard = ({
 }: Props) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <div className="text-end mt-1">
-        <span
-          className={classNames({
-            "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300":
-              statusMap[status].color == "red",
-            "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300":
-              statusMap[status].color == "green",
-            "text-xs font-medium me-2 px-2.5 py-0.5 rounded ": true,
-          })}
-        >
-          {statusMap[status].label}
-        </span>
+      <div className="flex justify-end m-2">
+        <Badge color={statusMap[status].color}>{statusMap[status].label}</Badge>
       </div>
       <div className="flex flex-col items-center p-10">
         <Image
