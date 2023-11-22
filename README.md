@@ -9,7 +9,7 @@ This project is build on NextJs and Prisma for backend, It's helps to manage sta
 - [ ] Manage Staffs
   - [x] Add Staffs
   - [x] List Staffs
-  - [ ] Edit Staffs
+  - [x] Edit Staffs
   - [x] Delete Staffs
   - [ ] Single member profile details
 - [ ] Manage leave and permissions
