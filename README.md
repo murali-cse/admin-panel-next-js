@@ -18,7 +18,7 @@ This project is build on NextJs and Prisma for backend, It's helps to manage sta
   - [ ] Add Project
   - [ ] Delete Project
   - [ ] Edit Project Details
-  - [ ] List Projects
+  - [x] List Projects
   - [ ] Show single project details
 
 ## Getting Started
