@@ -6,12 +6,12 @@ This project is build on NextJs and Prisma for backend, It's helps to manage sta
 
 - [ ] Auth
 - [ ] Analytics Dashboard
-- [ ] Manage Staffs
+- [x] Manage Staffs
   - [x] Add Staffs
   - [x] List Staffs
   - [x] Edit Staffs
   - [x] Delete Staffs
-  - [ ] Single member profile details
+  - [x] Single member profile details
 - [ ] Manage leave and permissions
 - [ ] Holiday and Event Management
 - [ ] Add new projects and track the status

@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
-
+//? get details of single employee
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
